@@ -20,9 +20,9 @@
               }
             },
             "required": ["shellCommand"]
-          },
-          "required": ["options"]
-        }
+          }
+        },
+        "required": ["options"]
       }
     },
     "message": {
