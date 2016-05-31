@@ -44,7 +44,7 @@ class Shell extends EventEmitter
   onConfig: (device={}) =>
     { options } = device
     debug 'on config', options
-    { @shellCommand, @cwd } = options
+    { @shellCommand, @cwd } = options || {}
 
   start: (device) =>
     { @uuid } = device
