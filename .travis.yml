@@ -1,0 +1,61 @@
+language: cpp
+os:
+- linux
+- osx
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-4.8
+    - g++-4.8-multilib
+    - gcc-multilib
+    - build-essential
+    - libbluetooth-dev
+    - libudev-dev
+    - libusb-1.0-0-dev
+env:
+  matrix:
+  - PACKAGER_NODE_VERSION="5.5" PACKAGER_ARCH="amd64" MAIN_BUILD="true"
+  - PACKAGER_NODE_VERSION="5.5" PACKAGER_ARCH="386"
+matrix:
+  exclude:
+  - os: osx
+    env: PACKAGER_NODE_VERSION="5.5" PACKAGER_ARCH="386"
+branches:
+  only:
+  - "/^v[0-9]/"
+before_install:
+- PACKAGER_URL="https://meshblu-connector.octoblu.com/tools/packager/latest"
+- curl -fsS "${PACKAGER_URL}/travis_install_node.sh" -o /tmp/travis_install_node.sh
+- chmod +x /tmp/travis_install_node.sh
+- ". /tmp/travis_install_node.sh"
+- if [ "$TRAVIS_OS_NAME" == "linux" -a "$MAIN_BUILD" == "true" ]; then export NPM_PUBLISH="true"; fi
+install:
+- npm install --build-from-source
+script:
+- npm test
+before_deploy:
+- npm install --build-from-source --production
+- npm install meshblu-connector-packager
+- npm dedupe
+- npm install -g flatten-packages
+- flatten-packages
+- npm run package
+deploy:
+- provider: releases
+  api_key:
+    secure: "bhh0xkgy/OEa3PY0p41AHCsuCuyK5suy4EnDBB8TAGSxi+vo4SZeqO3sVZSfAk93JM5GAZSAf6rxukSkCfhTChhViACbAZYT3EOV+sspNndaPB9fgI4GO1nR5w7z6N3qp/KigqkpJlZMNNskRLIxlYdEH6cNPNVTfe8j3sCIhSvb5tW+Axd6hi0xHxXMmVeEwaLsOFMALD+TU18yCjXprG2oXhnIpCQ235ZA09s6GKOyQWLj7tcw+l2Umr+DNJgF8AyswwZIIuuYQAXex6y0LFNGWQ7fbgkphAPrdD5ToCh3Zh4PYvCGDQpioL/pZ41bKMU+A34KRT8FVEtui/kSpYznuRPUseEzxTZaiB1zMSnV2j68YVsSXcirAKGV82IhZXyuivOgyEPI1eQbWhOHlwoL9Tf+qEU1/SjWiZagTrfBR3JL/mu8V9Db2Do5gEYVbg4LTztz/NqXCoFls2+UeQ25qZIJQSxAIq5ClnDpShLHhSncZaujgT++Zbb6y99MQb843i0S3W/UMfZTdRg7oF/EDhqB+78DAv91Gv0hY+6UCHJIvYjyS6O4jgxqpmZbPbTQAfOpKo3vZU/gD0f0EVgmb9K5lL7W6r9/jtx8DmM1xBjp6HZiOe4eMpUxHjweNOdz/cFEwVGDTd8MCUA8FlO3dBjpEAetOjUUp72kzog="
+  file_glob: true
+  file:
+  - "deploy/*"
+  skip_cleanup: true
+  on:
+    tags: true
+- provider: npm
+  email: serveradmin@octoblu.com
+  api_key:
+    secure: "iiTJWAyx2PA+vmbRYJULXTouv65SB+6gBDQdsViXZyGSGJWEc0JrxBKzBoCRIQagNWcYSWJWfAX0zOh5N/ieOQyKIg5yZFGG8Qqg3W30xlOZv63HYob1HIysAa1ds28NAsQfEpJFC4KQ5P2TDHlpWVM9IuJQ/A++3IIrWFnUx+gTNs6OIWZCegrYlvTp9/IVou8K41eHKJi8GiRjkMWfAiVA8z6izqujrbQHfX8moeM+uiY/F2dC2DaaIksPssoqU9Be/IlFA+xOoQFVL143eAVYIc4GtzH/ICH1O8BKTOQlri2cvxzowEHW7sA7ue+JnxJgCytUe7lbxMs0lsuqr66IePUZB5Clt8rpqIasYIoVmPzThsEsc9+IhYKyBC+WM3aT6HTji6QRnOshXhUeIIcldbBT8qpS1jc2cNwA5CnrGkcruuhARYrdBkC8//rOzj97OyFVtL/nfDMP+9HNnumFINCLE2tkZ4N5BwMxlvn2oEilvoQ0cOEMUXC7JOQEHhm8oZkbugoxSF/ayXMBC9WI+OAWKD5wchIgJZsOiyMQ5kjQlibEb+/KUa2z+TV+eaPiblEmodWPXmL95yQx5i79FJp610ybVHj79Awh43rhBfOOY4wlC8cf4+RTCXea7A2ti675vsRhAaQEqssxJFLWrbV2eL2CIOgqfWvwcgk="
+  on:
+    tags: true
+    condition: "$NPM_PUBLISH = true"

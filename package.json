@@ -1,0 +1,53 @@
+{
+  "name": "meshblu-connector-shell",
+  "version": "1.0.0",
+  "description": "Meshblu Connector ",
+  "homepage": "https://github.com/octoblu/shell",
+  "bugs": "https://github.com/octoblu/shell/issues",
+  "author": {
+    "name": "Octoblu",
+    "url": "https://github.com/octoblu"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/octoblu/shell.git"
+  },
+  "scripts": {
+    "start": "meshblu-connector-runner",
+    "test": "mocha",
+    "package": "meshblu-connector-packager"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "coffee-coverage": "^1.0.1",
+    "mocha": "^2.4.5",
+    "sinon": "^1.17.3",
+    "sinon-chai": "^2.8.0"
+  },
+  "dependencies": {
+    "coffee-script": "^1.10.0",
+    "cross-spawn": "^4.0.0",
+    "debug": "^2.2.0",
+    "eventemitter2": "^1.0.0",
+    "meshblu-config": "^4.0.0",
+    "meshblu-connector-runner": "^6.0.0"
+  },
+  "meshbluConnector": {
+    "githubSlug": "octoblu/meshblu-connector-shell",
+    "schemasUrl": "https://raw.githubusercontent.com/octoblu/meshblu-connector-shell/v1.0.0/schemas.json"
+  },
+  "platformDependencies": {
+    "darwin": [],
+    "win32": [],
+    "win64": [],
+    "linux": [],
+    "android": [],
+    "ios": []
+  },
+  "license": "MIT",
+  "keywords": [
+    "meshblu-connector",
+    "gateblu"
+  ]
+}
