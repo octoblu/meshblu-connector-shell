@@ -1,10 +1,18 @@
+_     = require 'lodash'
+debug = require('debug')('meshblu-connector-shell:shell-manager')
+spawn = require 'cross-spawn'
+
 class ShellManager
   runCommand: ({command, workingDirectory, args}, callback) =>
     @_spawn {command, workingDirectory, args}, callback
 
   _spawn: ({command, workingDirectory, args}, callback) =>
+    callback = _.once callback
     debug "spawn: #{command} #{args.join(' ')}"
-    proc = spawn command, args, { cwd: workingDirectory, env: process.env }
+    options =
+      cwd: workingDirectory
+      env: process.env
+    proc = spawn command, args, options
 
     stdout = ''
     stderr = ''
@@ -15,12 +23,11 @@ class ShellManager
 
     proc.stdout.on 'data', (data) =>
       debug 'stdout', data.toString()
-      stdout += data.toString()
-      callback null, {type: 'stdout', data: data.toString()}
+      stdout += data.toString() + "\n"
 
     proc.stderr.on 'data', (data) =>
       debug 'stderr', data.toString()
-      stderr += data.toString()
+      stderr += data.toString() + "\n"
 
     proc.on 'close', (exitCode) =>
       debug 'closed', exitCode

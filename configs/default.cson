@@ -5,14 +5,14 @@ properties:
     title: "Options"
     type: "object"
     properties:
-      shellCommand:
+      command:
         title: "Shell Command"
         type: "string"
-      cwd:
+      workingDirectory:
         title: "Working Directory"
         type: "string"
     required: [
-      "shellCommand"
+      "command"
     ]
 required: [
   "options"

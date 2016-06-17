@@ -1,1 +1,18 @@
-{}
+title: "Run Command"
+type: "object"
+properties:
+  data:
+    type: "object"
+    properties:
+      exitCode:
+        type: "number"
+        title: "Exit Code"
+      stderr:
+        type: "string"
+        title: "stderr of shell process"
+      stdout:
+        type: "string"
+        title: "stdout of shell process"
+    required: [
+      "exitCode"
+    ]
