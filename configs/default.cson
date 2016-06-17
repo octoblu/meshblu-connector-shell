@@ -1,0 +1,19 @@
+title: "Default Configuration"
+type: "object"
+properties:
+  options:
+    title: "Options"
+    type: "object"
+    properties:
+      shellCommand:
+        title: "Shell Command"
+        type: "string"
+      cwd:
+        title: "Working Directory"
+        type: "string"
+    required: [
+      "shellCommand"
+    ]
+required: [
+  "options"
+]

@@ -16,7 +16,9 @@
   "scripts": {
     "start": "meshblu-connector-runner",
     "test": "mocha",
-    "package": "meshblu-connector-packager"
+    "package": "meshblu-connector-packager",
+    "generate:package": "meshblu-connector-packager",
+    "generate:schema": "meshblu-connector-schema-generator > schemas.json"
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -31,7 +33,8 @@
     "debug": "^2.2.0",
     "eventemitter2": "^1.0.0",
     "meshblu-config": "^4.0.0",
-    "meshblu-connector-runner": "^6.0.0"
+    "meshblu-connector-runner": "^7.0.0",
+    "fs-cson": "^0.3.2"
   },
   "meshbluConnector": {
     "githubSlug": "octoblu/meshblu-connector-shell",
@@ -42,8 +45,8 @@
     "win32": [],
     "win64": [],
     "linux": [],
-    "android": [],
-    "ios": []
+    "android": null,
+    "ios": null
   },
   "license": "MIT",
   "keywords": [

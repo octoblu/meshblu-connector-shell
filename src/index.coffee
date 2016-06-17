@@ -1,54 +1,29 @@
 {EventEmitter}  = require 'events'
-spawn           = require 'cross-spawn'
 debug           = require('debug')('meshblu-connector-shell:index')
+ShellManager    = require './shell-manager'
 
-class Shell extends EventEmitter
-  onMessage: (message) =>
-    return console.error 'missing shell command' unless @shellCommand?
-    { options } = message.payload || {};
-    options ?= []
-    debug "spawn: #{@shellCommand} #{options.join(' ')}"
-    proc = spawn @shellCommand, options, { @cwd, env: process.env }
+class Connector extends EventEmitter
+  constructor: ->
+    @shell = new ShellManager
 
-    proc.on 'error', (error) =>
-      debug 'error', error
-      @emit 'error', error
+  isOnline: (callback) =>
+    callback null, running: true
 
-    proc.stdout.on 'data', (data) =>
-      debug 'stdout', data.toString()
-      message =
-        devices: ['*']
-        topic: 'stdout'
-        payload:
-          stdout: data.toString()
-      @emit 'message', message
+  close: (callback) =>
+    debug 'on close'
+    callback()
 
-    proc.stderr.on 'data', (data) =>
-      debug 'stderr', data.toString()
-      message =
-        devices: ['*']
-        topic: 'stderr'
-        payload:
-          stderr: data.toString()
-      @emit 'message', message
+  runCommand: ({args}, callback) =>
+    {command, workingDirectory} = @options
+    @shell.runCommand {command, workingDirectory, args}, callback
 
-    proc.on 'close', (code) =>
-      debug 'closed', code
-      message =
-        devices: ['*']
-        topic: 'exit'
-        payload:
-          code: code
-      @emit 'message', message
+  onConfig: (device={}, callback=->) =>
+    { @options } = device
+    debug 'on config', @options
+    callback()
 
-  onConfig: (device={}) =>
-    { options } = device
-    debug 'on config', options
-    { @shellCommand, @cwd } = options || {}
+  start: (device, callback) =>
+    debug 'started'
+    @onConfig device, callback
 
-  start: (device) =>
-    { @uuid } = device
-    debug 'started', @uuid
-    @onConfig device
-
-module.exports = Shell
+module.exports = Connector
