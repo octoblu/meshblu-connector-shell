@@ -1,7 +1,6 @@
 angular: [
   {
     key: "data.args",
-    add: "New",
-    items: []
+    add: "New"
   }
 ]
