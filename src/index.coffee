@@ -14,8 +14,8 @@ class Connector extends EventEmitter
     callback()
 
   runCommand: ({args}, callback) =>
-    {command, workingDirectory} = @options
-    @shell.runCommand {command, workingDirectory, args}, callback
+    {command, workingDirectory, shell} = @options
+    @shell.runCommand {command, workingDirectory, args, shell}, callback
 
   onConfig: (device={}, callback=->) =>
     { @options } = device

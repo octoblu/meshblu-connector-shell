@@ -31,6 +31,7 @@ describe 'Connector', ->
         workingDirectory: 'home'
         command: 'foo'
         args: [1,2,3]
+        shell: undefined
 
       expect(@shell.runCommand).to.have.been.calledWith options
 

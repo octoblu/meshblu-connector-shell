@@ -8,6 +8,10 @@ properties:
       command:
         title: "Shell Command"
         type: "string"
+      shell:
+        title: "Wrap in a shell"
+        type: "boolean"
+        default: true
       workingDirectory:
         title: "Working Directory"
         type: "string"

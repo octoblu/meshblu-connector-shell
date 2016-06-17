@@ -11,6 +11,7 @@ describe 'ShellManager', ->
         command: 'echo'
         args: [1,2,3]
         workingDirectory: 'home'
+        shell: false
 
       @sut.runCommand options, done
 
@@ -19,5 +20,6 @@ describe 'ShellManager', ->
         command: 'echo'
         args: [1,2,3]
         workingDirectory: 'home'
+        shell: false
 
       expect(@sut._spawn).to.have.been.calledWith options

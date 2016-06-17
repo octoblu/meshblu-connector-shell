@@ -3,15 +3,16 @@ debug = require('debug')('meshblu-connector-shell:shell-manager')
 spawn = require 'cross-spawn'
 
 class ShellManager
-  runCommand: ({command, workingDirectory, args}, callback) =>
-    @_spawn {command, workingDirectory, args}, callback
+  runCommand: ({command, workingDirectory, args, shell}, callback) =>
+    @_spawn {command, workingDirectory, args, shell}, callback
 
-  _spawn: ({command, workingDirectory, args}, callback) =>
+  _spawn: ({command, workingDirectory, args, shell}, callback) =>
     callback = _.once callback
     debug "spawn: #{command} #{args.join(' ')}"
     options =
       cwd: workingDirectory
       env: process.env
+      shell: shell
     proc = spawn command, args, options
 
     stdout = ''
@@ -23,11 +24,11 @@ class ShellManager
 
     proc.stdout.on 'data', (data) =>
       debug 'stdout', data.toString()
-      stdout += data.toString() + "\n"
+      stdout += data.toString()
 
     proc.stderr.on 'data', (data) =>
       debug 'stderr', data.toString()
-      stderr += data.toString() + "\n"
+      stderr += data.toString()
 
     proc.on 'close', (exitCode) =>
       debug 'closed', exitCode

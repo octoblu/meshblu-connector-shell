@@ -9,7 +9,13 @@ class RunCommand
     return callback @_userError(422, 'data.args is required') unless _.isArray data?.args
 
     {args} = data
-    @connector.runCommand {args}, callback
+
+    @connector.runCommand {args}, (error, data) =>
+      return callback error if error?
+      metadata =
+        code: 200
+        status: http.STATUS_CODES[200]
+      return callback null, {metadata, data}
 
   _userError: (code, message) =>
     error = new Error message
