@@ -1,6 +1,6 @@
 {
   "name": "meshblu-connector-shell",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Meshblu Connector ",
   "homepage": "https://github.com/octoblu/shell",
   "bugs": "https://github.com/octoblu/shell/issues",
@@ -38,7 +38,7 @@
   },
   "meshbluConnector": {
     "githubSlug": "octoblu/meshblu-connector-shell",
-    "schemasUrl": "https://raw.githubusercontent.com/octoblu/meshblu-connector-shell/v1.0.2/schemas.json"
+    "schemasUrl": "https://file-downloader.octoblu.com/github-release/octoblu/meshblu-connector-shell/v2.0.1/schemas.json"
   },
   "platformDependencies": {
     "darwin": [],
