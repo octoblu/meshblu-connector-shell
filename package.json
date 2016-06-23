@@ -1,9 +1,9 @@
 {
   "name": "meshblu-connector-shell",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Meshblu Connector ",
-  "homepage": "https://github.com/octoblu/shell",
-  "bugs": "https://github.com/octoblu/shell/issues",
+  "homepage": "https://github.com/octoblu/meshblu-connector-shell",
+  "bugs": "https://github.com/octoblu/meshblu-connector-shell/issues",
   "author": {
     "name": "Octoblu",
     "url": "https://github.com/octoblu"
@@ -11,12 +11,11 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/octoblu/shell.git"
+    "url": "https://github.com/octoblu/meshblu-connector-shell.git"
   },
   "scripts": {
     "start": "meshblu-connector-runner",
     "test": "mocha",
-    "package": "meshblu-connector-packager",
     "generate:package": "meshblu-connector-packager",
     "generate:schema": "meshblu-connector-schema-generator > schemas.json"
   },
@@ -32,13 +31,13 @@
     "cross-spawn": "^4.0.0",
     "debug": "^2.2.0",
     "eventemitter2": "^1.0.0",
+    "fs-cson": "^0.3.2",
     "meshblu-config": "^4.0.0",
-    "meshblu-connector-runner": "^7.0.0",
-    "fs-cson": "^0.3.2"
+    "meshblu-connector-runner": "^8.0.0",
+    "meshblu-connector-schema-generator": "^2.0.0"
   },
   "meshbluConnector": {
-    "githubSlug": "octoblu/meshblu-connector-shell",
-    "schemasUrl": "https://file-downloader.octoblu.com/github-release/octoblu/meshblu-connector-shell/v2.0.2/schemas.json"
+    "githubSlug": "octoblu/meshblu-connector-shell"
   },
   "platformDependencies": {
     "darwin": [],
