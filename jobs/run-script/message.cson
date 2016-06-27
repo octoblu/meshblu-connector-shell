@@ -1,15 +1,17 @@
-title: "Default Configuration"
+title: "Run Script"
 type: "object"
 properties:
-  options:
-    title: "Options"
+  data:
     type: "object"
     properties:
-      shell:
-        title: "Shell Command"
-        description: "Shell process that will be executed (e.g. /bin/bash, /usr/bin/fish, powershell.exe, CMD)"
-        type: "string"
-        default: "/bin/sh"
+      args:
+        type: "array"
+        title: "Arguments"
+        description: "Arguments to pass to shell"
+        default: []
+        items:
+          title: "Argument"
+          type: "string"
       env:
         type: "array"
         title: "Environment Variables"
@@ -29,9 +31,16 @@ properties:
             "name"
             "value"
           ]
+      script:
+        type: "string"
+        title: "Script"
+        description: "Write to a temporary file and execute"
+      workingDirectory:
+        type: "string"
+        title: "Working Directory"
     required: [
-      "shell"
+      "script"
     ]
 required: [
-  "options"
+  "data"
 ]

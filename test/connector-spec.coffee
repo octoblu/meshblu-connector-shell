@@ -4,6 +4,7 @@ describe 'Connector', ->
   beforeEach (done) ->
     @sut = new Connector
     {@shell} = @sut
+    @shell.connect = sinon.stub().yields null
     options =
       command: 'foo'
       workingDirectory: 'home'
@@ -20,22 +21,50 @@ describe 'Connector', ->
         expect(response.running).to.be.true
         done()
 
-  describe '->runCommand', ->
+  describe '->runScript', ->
     beforeEach (done) ->
-      @shell.runCommand = sinon.stub().yields null
-      args = [1,2,3]
-      @sut.runCommand {args}, done
-
-    it 'should call shell.runCommand', ->
+      @shell.runScript = sinon.stub().yields null
       options =
         workingDirectory: 'home'
-        command: 'foo'
+        script: 'foo'
         args: [1,2,3]
-        shell: undefined
+        env: []
+      @sut.runScript options, done
 
-      expect(@shell.runCommand).to.have.been.calledWith options
+    it 'should call shell.runScript', ->
+      options =
+        workingDirectory: 'home'
+        script: 'foo'
+        args: [1,2,3]
+        env: []
+
+      expect(@shell.runScript).to.have.been.calledWith options
+
+  describe '->runScriptUrl', ->
+    beforeEach (done) ->
+      @shell.runScriptUrl = sinon.stub().yields null
+      options =
+        workingDirectory: 'home'
+        url: 'foo'
+        args: [1,2,3]
+        env: []
+      @sut.runScriptUrl options, done
+
+    it 'should call shell.runScript', ->
+      options =
+        workingDirectory: 'home'
+        url: 'foo'
+        args: [1,2,3]
+        env: []
+
+      expect(@shell.runScriptUrl).to.have.been.calledWith options
 
   describe '->onConfig', ->
-    describe 'when called with a config', ->
-      it 'should not throw an error', ->
-        expect(=> @sut.onConfig { type: 'hello' }).to.not.throw(Error)
+    beforeEach (done) ->
+      options =
+        shell: 'hi'
+        env: []
+      @sut.onConfig {options}, done
+
+    it 'should call @shell.connect', ->
+      expect(@shell.connect).to.have.been.calledWith shell: 'hi', env: []

@@ -1,5 +1,7 @@
 angular: [
-  { key: "options.command" }
   { key: "options.shell" }
-  { key: "options.workingDirectory" }
+  {
+    key: "data.env",
+    add: "New"
+  }
 ]

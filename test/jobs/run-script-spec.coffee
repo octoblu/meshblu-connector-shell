@@ -1,13 +1,16 @@
-{job} = require '../../jobs/run-command'
+{job} = require '../../jobs/run-script'
 
-describe 'RunCommand', ->
+describe 'RunScript', ->
   context 'when given a valid message', ->
     beforeEach (done) ->
       @connector =
-        runCommand: sinon.stub().yields null
+        runScript: sinon.stub().yields null
       message =
         data:
-          args: []
+          script: 'foo'
+          workingDirectory: 'home'
+          env: [name: "DEBUG", value: '*']
+          args: [1,2,3]
       @sut = new job {@connector}
       @sut.do message, (@error) =>
         done()
@@ -15,8 +18,13 @@ describe 'RunCommand', ->
     it 'should not error', ->
       expect(@error).not.to.exist
 
-    it 'should call connector.runCommand', ->
-      expect(@connector.runCommand).to.have.been.calledWith args: []
+    it 'should call connector.runScript', ->
+      options =
+        script: 'foo'
+        workingDirectory: 'home'
+        env: [name: "DEBUG", value: '*']
+        args: [1,2,3]
+      expect(@connector.runScript).to.have.been.calledWith options
 
   context 'when given an invalid message', ->
     beforeEach (done) ->

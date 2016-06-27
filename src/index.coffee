@@ -11,16 +11,19 @@ class Connector extends EventEmitter
 
   close: (callback) =>
     debug 'on close'
-    callback()
+    @shell.close callback
 
-  runCommand: ({args}, callback) =>
-    {command, workingDirectory, shell} = @options
-    @shell.runCommand {command, workingDirectory, args, shell}, callback
+  runScript: ({args, script, env, workingDirectory}, callback) =>
+    @shell.runScript {args, script, env, workingDirectory}, callback
+
+  runScriptUrl: ({args, url, env, workingDirectory}, callback) =>
+    @shell.runScriptUrl {args, url, env, workingDirectory}, callback
 
   onConfig: (device={}, callback=->) =>
     { @options } = device
     debug 'on config', @options
-    callback()
+    {shell, env} = @options ? {}
+    @shell.connect {shell, env}, callback
 
   start: (device, callback) =>
     debug 'started'

@@ -1,0 +1,14 @@
+angular: [
+  {
+    key: "data.script"
+    type: "textarea"
+  }
+  {
+    key: "data.args",
+    add: "New"
+  }
+  {
+    key: "data.env",
+    add: "New"
+  }
+]

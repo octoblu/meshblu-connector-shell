@@ -1,16 +1,16 @@
 _    = require 'lodash'
 http = require 'http'
 
-class RunCommand
+class RunScriptUrl
   constructor: ({@connector}) ->
-    throw new Error 'RunCommand requires connector' unless @connector?
+    throw new Error 'RunScriptUrl requires connector' unless @connector?
 
   do: ({data}, callback) =>
-    return callback @_userError(422, 'data.args is required') unless _.isArray data?.args
+    return callback @_userError(422, 'data.url is required') unless data?.url?
 
-    {args} = data
+    {url, args, env, workingDirectory} = data
 
-    @connector.runCommand {args}, (error, data) =>
+    @connector.runScriptUrl {url, args, env, workingDirectory}, (error, data) =>
       return callback error if error?
       metadata =
         code: 200
@@ -22,4 +22,4 @@ class RunCommand
     error.code = code
     return error
 
-module.exports = RunCommand
+module.exports = RunScriptUrl
