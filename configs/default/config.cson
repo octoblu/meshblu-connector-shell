@@ -10,9 +10,21 @@ properties:
         description: "Shell process that will be executed (e.g. /bin/bash, /usr/bin/fish, powershell.exe, CMD)"
         type: "string"
         default: "/bin/sh"
+      fileExtension:
+        type: "string"
+        title: "File Extension (Optional)"
+        description: "File extension used for temporary file (e.g. .ps1)"
+      args:
+        type: "array"
+        title: "Shell Arguments (Optional)"
+        description: "Arguments to pass to the shell, will not be passed to the script (e.g. -File)"
+        default: []
+        items:
+          title: "Argument"
+          type: "string"
       env:
         type: "array"
-        title: "Environment Variables"
+        title: "Environment Variables (Optional)"
         description: "Environment variables to pass to shell"
         default: []
         items:

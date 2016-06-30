@@ -1,6 +1,6 @@
 {
   "name": "meshblu-connector-shell",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Meshblu Connector ",
   "homepage": "https://github.com/octoblu/meshblu-connector-shell",
   "bugs": "https://github.com/octoblu/meshblu-connector-shell/issues",
@@ -32,6 +32,7 @@
     "debug": "^2.2.0",
     "eventemitter2": "^1.0.0",
     "fs-cson": "^0.3.2",
+    "lodash": "^4.13.1",
     "meshblu-config": "^4.0.0",
     "meshblu-connector-runner": "^8.0.0",
     "meshblu-connector-schema-generator": "^2.0.0",

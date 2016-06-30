@@ -18,6 +18,10 @@ describe 'ShellManager', ->
         name: 'GLU'
         value: 'STICK'
       ]
+      args: [
+        '-File'
+      ]
+      fileExtension: '.sh'
     @sut.connect options, done
 
   describe '->runScript', ->
@@ -29,7 +33,7 @@ describe 'ShellManager', ->
         workingDirectory: 'home'
 
       @sut._writeTempfile = (script, callback) =>
-        callback null, path: '/tmp/not-really-executed'
+        callback null, path: '/tmp/not-really-executed.sh'
 
       @sut.runScript options, (error, @response) =>
         done error
@@ -45,7 +49,7 @@ describe 'ShellManager', ->
         cwd: 'home'
         env: env
 
-      expect(@sut.spawn).to.have.been.calledWith 'flish', ['/tmp/not-really-executed', 1, 2, 3], options
+      expect(@sut.spawn).to.have.been.calledWith 'flish', ['-File', '/tmp/not-really-executed.sh', 1, 2, 3], options
 
     it 'should yield response', ->
       data =
@@ -63,7 +67,7 @@ describe 'ShellManager', ->
         workingDirectory: 'home'
 
       @sut._writeTempfile = (script, callback) =>
-        callback null, path: '/tmp/not-really-executed'
+        callback null, path: '/tmp/not-really-executed.sh'
 
       @sut.runScriptUrl options, (error, @response) =>
         done error
@@ -79,7 +83,7 @@ describe 'ShellManager', ->
         cwd: 'home'
         env: env
 
-      expect(@sut.spawn).to.have.been.calledWith 'flish', ['/tmp/not-really-executed', 1, 2, 3], options
+      expect(@sut.spawn).to.have.been.calledWith 'flish', ['-File', '/tmp/not-really-executed.sh', 1, 2, 3], options
 
     it 'should yield response', ->
       data =

@@ -22,8 +22,8 @@ class Connector extends EventEmitter
   onConfig: (device={}, callback=->) =>
     { @options } = device
     debug 'on config', @options
-    {shell, env} = @options ? {}
-    @shell.connect {shell, env}, callback
+    {shell, env, args, fileExtension} = @options ? {}
+    @shell.connect {shell, env, args, fileExtension}, callback
 
   start: (device, callback) =>
     debug 'started'

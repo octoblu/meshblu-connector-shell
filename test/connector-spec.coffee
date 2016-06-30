@@ -64,7 +64,10 @@ describe 'Connector', ->
       options =
         shell: 'hi'
         env: []
+        args: []
+        fileExtension: '.boo'
+
       @sut.onConfig {options}, done
 
     it 'should call @shell.connect', ->
-      expect(@shell.connect).to.have.been.calledWith shell: 'hi', env: []
+      expect(@shell.connect).to.have.been.calledWith shell: 'hi', env: [], args: [], fileExtension: '.boo'

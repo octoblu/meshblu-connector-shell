@@ -15,11 +15,12 @@ class ShellManager
   close: (callback) =>
     temp.cleanup => callback()
 
-  connect: ({@shell, @env}, callback) =>
+  connect: ({@shell, @env, @fileExtension, @args}, callback) =>
+    @args ?= []
     callback()
 
   _writeTempfile: (script, callback) =>
-    temp.open prefix: 'meshblu-shell', (error, info) =>
+    temp.open prefix: 'meshblu-shell', suffix: @fileExtension, (error, info) =>
       return callback error if error?
       fs.write info.fd, script, (error) =>
         return callback error if error?
@@ -42,13 +43,13 @@ class ShellManager
     @_writeTempfile script, (error, {path}) =>
       return callback error if error?
       localenv = @_handleEnv env
-      args.unshift path
+      spawn_args = _.concat @args, [path], args
       options =
         cwd: workingDirectory
         env: localenv
-      debug "Calling #{@shell} with: ", {args, options}
+      debug "Calling #{@shell} with: ", {spawn_args, options}
 
-      proc = @spawn @shell, args, options
+      proc = @spawn @shell, spawn_args, options
 
       @_handleProc proc, callback
 
