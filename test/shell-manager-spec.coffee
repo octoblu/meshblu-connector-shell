@@ -48,6 +48,7 @@ describe 'ShellManager', ->
       options =
         cwd: 'home'
         env: env
+        stdio: ['ignore', 'pipe', 'pipe']
 
       expect(@sut.spawn).to.have.been.calledWith 'flish', ['-File', '/tmp/not-really-executed.sh', 1, 2, 3], options
 
@@ -82,6 +83,7 @@ describe 'ShellManager', ->
       options =
         cwd: 'home'
         env: env
+        stdio: ['ignore', 'pipe', 'pipe']
 
       expect(@sut.spawn).to.have.been.calledWith 'flish', ['-File', '/tmp/not-really-executed.sh', 1, 2, 3], options
 

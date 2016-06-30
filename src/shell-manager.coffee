@@ -43,10 +43,11 @@ class ShellManager
     @_writeTempfile script, (error, {path}) =>
       return callback error if error?
       localenv = @_handleEnv env
-      spawn_args = _.concat @args, [path], args
+      spawn_args = _.concat _.compact(@args), [path], _.compact(args)
       options =
         cwd: workingDirectory
         env: localenv
+        stdio: ['ignore', 'pipe', 'pipe' ]
       debug "Calling #{@shell} with: ", {spawn_args, options}
 
       proc = @spawn @shell, spawn_args, options
