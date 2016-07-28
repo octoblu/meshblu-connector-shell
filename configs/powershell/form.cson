@@ -1,0 +1,12 @@
+angular: [
+  { key: "options.shell" }
+  { key: "options.fileExtension"}
+  {
+    key: "options.args",
+    add: "New"
+  }
+  {
+    key: "options.env",
+    add: "New"
+  }
+]

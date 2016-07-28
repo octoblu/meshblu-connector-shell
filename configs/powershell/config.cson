@@ -1,0 +1,51 @@
+title: "Powershell"
+type: "object"
+"x-group-name": "Windows"
+properties:
+  options:
+    title: "Options"
+    type: "object"
+    properties:
+      shell:
+        title: "Shell Command"
+        description: "Shell process that will be executed (e.g. /bin/bash, /usr/bin/fish, powershell.exe, CMD)"
+        type: "string"
+        default: "powershell.exe"
+      fileExtension:
+        type: "string"
+        title: "File Extension (Optional)"
+        description: "File extension used for temporary file (e.g. .ps1)"
+        default: ".ps1"
+      args:
+        type: "array"
+        title: "Shell Arguments (Optional)"
+        description: "Arguments to pass to the shell, will not be passed to the script (e.g. -File)"
+        default: ["-ExecutionPolicy", "ByPass", "-File"]
+        items:
+          title: "Argument"
+          type: "string"
+      env:
+        type: "array"
+        title: "Environment Variables (Optional)"
+        description: "Environment variables to pass to shell"
+        default: []
+        items:
+          title: "Environment Variable"
+          type: "object"
+          properties:
+            name:
+              title: "Name"
+              type: "string"
+            value:
+              title: "Value"
+              type: "string"
+          required: [
+            "name"
+            "value"
+          ]
+    required: [
+      "shell"
+    ]
+required: [
+  "options"
+]
