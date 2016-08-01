@@ -31,6 +31,11 @@ $ env DEBUG='meshblu-connector-shell*' npm start
 $ npm run package
 ```
 
+## Example
+This is how to have your shell read off some text with a scary voice...
+![alt text](http://i.imgur.com/M4zYc0t.png)
+![alt text](http://i.imgur.com/ANICRTJ.png)
+
 ## License
 
 The MIT License (MIT)
