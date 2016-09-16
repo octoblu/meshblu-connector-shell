@@ -1,11 +1,14 @@
 # meshblu-connector-shell
 
+[![Build Status](https://travis-ci.org/octoblu/meshblu-connector-shell.svg?branch=master)](https://travis-ci.org/octoblu/meshblu-connector-shell)
+[![Test Coverage](https://codecov.io/gh/octoblu/meshblu-connector-shell/branch/master/graph/badge.svg)](https://codecov.io/gh/octoblu/meshblu-connector-shell)
 [![Dependency status](http://img.shields.io/david/octoblu/meshblu-connector-shell.svg?style=flat)](https://david-dm.org/octoblu/meshblu-connector-shell)
 [![devDependency Status](http://img.shields.io/david/dev/octoblu/meshblu-connector-shell.svg?style=flat)](https://david-dm.org/octoblu/meshblu-connector-shell#info=devDependencies)
-[![Build Status](http://img.shields.io/travis/octoblu/meshblu-connector-shell.svg?style=flat&branch=master)](https://travis-ci.org/octoblu/meshblu-connector-shell)
 [![Slack Status](http://community-slack.octoblu.com/badge.svg)](http://community-slack.octoblu.com)
 
 [![NPM](https://nodei.co/npm/meshblu-connector-shell.svg?style=flat)](https://npmjs.org/package/meshblu-connector-shell)
+[![Dependency status](http://img.shields.io/david/octoblu/meshblu-connector-shell.svg?style=flat)](https://david-dm.org/octoblu/meshblu-connector-shell)
+
 
 ## Installing
 
